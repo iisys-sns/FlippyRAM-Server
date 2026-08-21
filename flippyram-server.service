@@ -1,0 +1,13 @@
+[Unit]
+Description=FlippyRAM-Server webserver used for the Rowhammer Study
+
+[Service]
+ExecStart=/usr/bin/flippyram-server /etc/flippyram-server/config.json
+Restart=always
+User=flippyram-server
+Group=flippyram-server
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,37 @@
+{
+	"listen_address": "127.0.0.1:8443",
+	"http_redirect_listen_address": "127.0.0.1:8080",
+	"web_root": "/var/flippyram/web/",
+	"index": "index.html",
+	"token_template": "token.html",
+	"dataset_directory": "/var/flippyram/data/",
+	"whitelist_path": "/var/flippyram/whitelist.txt",
+	"permitted_uploads_path": "/var/flippyram/permitted_uploads.txt",
+	"certificate_path": "/var/flippyram/flippyram.crt",
+	"key_path": "/var/flippyram/flippyram.key",
+	"max_upload_size": 10485760,
+	"max_uncompressed_file_size": 1073741824,
+	"read_timeout": 10,
+	"max_header_bytes": 524288,
+	"static_response_headers": [
+		"Content-Security-Policy: default-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+		"Cross-Origin-Resource-Policy: same-site",
+		"X-Frame-Options: DENY",
+		"X-Content-Type-Options: nosniff",
+		"Referrer-Policy: no-referrer",
+		"Strict-Transport-Security: max-age=31536000; includeSubDomains; preload",
+		"Access-Control-Allow-Origin: https://flippyr.am",
+		"Cross-Origin-Opener-Policy: same-origin",
+		"Cross-Origin-Embedder-Policy: require-corp",
+		"Permissions-Policy: accelerometer=(), ambient-light-sensor=(), attribution-reporting=(), autoplay=(), bluetooth=(), browsing-topics=(), camera=(), compute-pressure=(), display-capture=(), document-domain=(), encrypted-media=(), fullscreen=(), gamepad=(), geolocation=(), gyroscope=(), hid=(), identity-credentials-get=(), idle-detection=(), local-fonts=(), magnetometer=(), microphone=(), midi=(), otp-credentials=(), payment=(), picture-in-picture=(), publickey-credentials-create=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), speaker-selection=(), storage-access=(), usb=(), web-share=(), window-management=(), xr-spatial-tracking=()",
+		"Server: nginx"
+	],
+	"max_cache_filesize": 16777216,
+	"database": {
+		"username": "dbuser",
+		"password": "dbpass",
+		"connection_type": "tcp",
+		"connection_location": "127.0.0.1:3306",
+		"name": "FlippyRam"
+	}
+}

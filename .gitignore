@@ -1,0 +1,6 @@
+go.mod
+go.sum
+bin/*
+flippyram/*crt
+flippyram/*key
+flippyram/data/*

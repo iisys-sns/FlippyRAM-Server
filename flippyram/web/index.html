@@ -1,0 +1,421 @@
+<html>
+    <head>
+        <title>FLIPPYR.AM</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="fonts/fontawesome.min.css" rel="stylesheet" />
+        <link href="fonts/solid.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="styles.css" />
+        <script src="/helper.js"></script>
+    </head>
+    <body>
+        <header>
+            <a href="/" class="logo" id="js-hammertime">
+                <img
+                    src="flippyram-02-white-border.svg"
+                    alt="Logo of a hammer smashing a RAM with the text Flippy.am on the side" />
+            </a>
+        </header>
+        <main>
+            <div class="questions">
+                <i class="questions-icon fa-solid fa-clipboard-question"></i>
+                <a class="link--flip" href="#question">
+                    I got a USB-Stick. How do I verify it?</a
+                >
+            </div>
+            <section class="info">
+                <b class="info-headline">FLIPPYR.AM</b>
+                <div class="info-content">
+                    <ul class="info-list listReset">
+                        <li>
+                            <b><i class="fa-solid fa-file-pdf"></i> Paper accepted at NDSS</b>
+                            We publish the
+														<a
+                                class="link--flip"
+                                href="https://flippyr.am/FlippyRAM.pdf"
+																>preprint</a>
+														of our research paper accepted at
+														<a
+																class="link--flip"
+																href="https://www.ndss-symposium.org/ndss2026/"
+																>NDSS</a>.
+                        </li>
+                        <li>
+                            <b><i class="fa-solid fa-video"></i> Talk @39c3</b>
+                            We held a talk about the results of the FlippyRAM study at the hacker conference
+                            <a
+                                class="link--flip"
+                                href="https://events.ccc.de/congress/2025/hub/en/index"
+                                >39c3</a
+                            >
+                            in Hamburg:
+                            <a
+                                class="link--flip"
+                                href="https://events.ccc.de/congress/2025/hub/en/event/detail/rowhammer-in-the-wild-large-scale-insights-from-flippyr-am"
+                                >Rowhammer in the Wild: Large-Scale Insights from FlippyR.AM</a
+                            >. The recording is available at
+                            <a
+                                class="link--flip"
+                                href="https://media.ccc.de/v/39c3-rowhammer-in-the-wild-large-scale-insights-from-flippyr-am"
+                                >media.ccc.de</a
+                            >.
+                        </li>
+                        <li>
+                            <b><i class="fa-solid fa-video"></i> Talk @38c3</b>
+                            We held a talk about Rowhammer at the hacker
+                            conference
+                            <a
+                                class="link--flip"
+                                href="https://events.ccc.de/congress/2024/hub/en/index"
+                                >38c3</a
+                            >
+                            in Hamburg:
+                            <a
+                                class="link--flip"
+                                href="https://events.ccc.de/congress/2024/hub/de/event/ten-years-of-rowhammer-a-retrospect-and-path-to-the-future/"
+                                >Ten Years of Rowhammer: A Retrospect (and Path
+                                to the Future)</a
+                            >. The recording is available at
+                            <a
+                                class="link--flip"
+                                href="https://media.ccc.de/v/38c3-ten-years-of-rowhammer-a-retrospect-and-path-to-the-future"
+                                >media.ccc.de</a
+                            >.
+                        </li>
+                        <li>
+                            <b>
+                                <i class="fa-solid fa-headphones"></i> Podcast
+                                @38c3</b
+                            >
+                            <a
+                                class="link--flip"
+                                href="https://www.heise.de/news/Passwort-Folge-22-Der-Podcast-macht-einen-Ausflug-zum-38C3-10221363.html"
+                                >Passwort - the heise security podcast</a
+                            >
+                            talked with us about Rowhammer (in German).
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h1>About Rowhammer</h1>
+                In 2014,
+                <a
+                    href="https://users.ece.cmu.edu/~yoonguk/papers/kim-isca14.pdf"
+                    target="_blank"
+                    class="link--flip"
+                    >Kim et al.</a
+                >
+                reported a new disturbance effect in modern DRAM that they
+                called Rowhammer. The Rowhammer effect flips bits in
+                inaccessible memory locations just by reading the content of
+                nearby memory locations that are attacker-accessible. They
+                trigger the Rowhammer effect by accessing memory locations at a
+                high frequency, using memory accesses and flushes. The root
+                problem behind Rowhammer is the continuous increase in cell
+                density in modern DRAM. In early 2015,
+                <a
+                    href="https://googleprojectzero.blogspot.com/2015/03/exploiting-dram-rowhammer-bug-to-gain.html"
+                    target="_blank"
+                    class="link--flip"
+                    >Seaborn and Dullien</a
+                >
+                were the first to demonstrate the security impact of this new
+                disturbance effect. In two different exploit variants, they
+                demonstrated privilege escalation from the Google Chrome NaCl
+                sandbox to native code execution and from unprivileged native
+                code execution to kernel privileges. Later, in 2015,
+                <a
+                    href="https://arxiv.org/pdf/1507.06955"
+                    target="_blank"
+                    class="link--flip"
+                    >Gruss et al.</a
+                >
+                demonstrated that this effect can even be triggered from
+                JavaScript, which they presented in their talk
+                <a
+                    href="https://media.ccc.de/v/32c3-7197-rowhammer_js_root_privileges_for_web_apps"
+                    target="_blank"
+                    class="link--flip">
+                    "Rowhammer.js: Root privileges for web apps?"</a
+                >
+                at 32C3.
+
+                <p>
+                    Now, in 2024, it is precisely 10 years after Rowhammer was
+                    discovered. We have seen a seemingly endless cat-and-mouse
+                    security game with a constant stream of new attacks and new
+                    defenses. New Rowhammer attacks pushed the boundaries
+                    further with each defense and challenge. While initial
+                    attacks required native code on Intel x86 with DDR3 memory,
+                    subsequent attacks have also been demonstrated on DDR4 and,
+                    more recently, DDR5. Attacks have also been demonstrated on
+                    mobile Arm processors and AMD x86 desktop processors.
+                    Furthermore, instead of native code, attacks from sandboxed
+                    JavaScript or even remote attacks via network have been
+                    demonstrated as well.
+                </p>
+
+                <p>
+                    We want to invite everyone to contribute to solving one of
+                    the biggest unanswered questions about Rowhammer: What is
+                    the real-world prevalence of the Rowhammer effect? How many
+                    systems, in their current configurations, are vulnerable to
+                    Rowhammer? As large-scale studies with hundreds to thousands
+                    of systems are not easy to perform, such a study has not yet
+                    been performed. Therefore, we developed a new framework to
+                    check if your system is vulnerable to Rowhammer,
+                    incorporating the state-of-the-art Rowhammer techniques and
+                    tools. Thus, we invite everyone to participate in this
+                    unique opportunity to join forces and close this research
+                    gap together.
+                </p>
+            </section>
+            <section>
+                <h2>Participate</h2>
+                <p>
+                    Welcome to our <b>FLIPPYR.AM</b> Study. We want to analyze
+                    the prevalence of Rowhammer in real-world systems. Everybody
+                    can participate in our study. The entire source code is
+                    open-source and available via
+                    <a
+                        href="https://github.com/iisys-sns/FlippyRAM"
+                        target="_blank"
+                        class="link--flip"
+                        >GitHub</a
+                    >. You can either build the ISO yourself or run the entire
+                    study using Docker. However, we highly recommend using the
+                    <a href="/hammeriso.iso" class="link--flip download"
+                        >ISO image</a
+                    >. <br />
+                    Simply follow these steps:
+                </p>
+                <ol class="participate-list">
+                    <li>
+                        <b>Download</b> our
+                        <a href="/hammeriso.iso" class="link--flip download"
+                            >ISO image</a
+                        >
+                        and <b>flash</b> it to a USB thumb drive (see the
+                        following Links for a instructions on
+                        <a
+                            href="https://wiki.archlinux.org/title/USB_flash_installation_medium#In_Windows"
+                            target="_blank"
+                            class="link--flip"
+                            >Windows</a
+                        >
+                        <a
+                            href="https://wiki.archlinux.org/title/USB_flash_installation_medium#In_macOS"
+                            target="_blank"
+                            class="link--flip"
+                            >MacOS</a
+                        >
+                        <a
+                            href="https://wiki.archlinux.org/title/USB_flash_installation_medium#In_GNU/Linux"
+                            target="_blank"
+                            class="link--flip"
+                            >Linux</a
+                        >).
+                    </li>
+                    <li>
+                        <b>Boot</b> the system you want to test using the thumb
+                        drive you created before.
+                    </li>
+                    <li>
+                        <b>Specify</b> the time the experiment should run and
+                        <b>confirm</b> your participation in the study. (When
+                        you do not want to participate in our study, you can
+                        still check if your system is vulnerable to Rowhammer
+                        without submitting any data.)
+                    </li>
+                    <li><b>Wait</b> for the experiment to finish</li>
+                    <li>
+                        You will get a brief overview of the results.
+                        Additionally, the raw results will be stored on the
+                        thumb drive for you to inspect them afterwards.
+                    </li>
+                    <li>
+                        The results will be uploaded to our server and you can
+                        access them using a URL shown at the end of the test
+                        (only if you confimed to participate before).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Incentives</h2>
+                <p>
+                    When you upload a valid dataset, you will receive a
+                    cryptographic token. This token is generated by hashing
+                    random data, and when you upload your dataset, we will save
+                    this token separately in our database. This means the token
+                    is not associated with your dataset. This ensures that you
+                    can participate in the raffle without linking the token to
+                    your dataset. Please make sure to bookmark or save this
+                    token. As an incentive, the following two rewards can be
+                    won:
+                </p>
+
+                <ol>
+                    <li>
+                        <s>The first people to send us 10 valid tokens via e-mail
+                        (<code class="mail"
+                            >flippy underscore ram at hof minus university dot
+                            de</code
+                        >) will receive a free flippyr.am t-shirt. We have 10
+                        t-shirts to give away. First come, first served!</s>
+												As of 2025-05-06, we gave out all t-shirts, so you will not get t-shirts anymore.
+                    </li>
+                    <li>
+                        <s>Everyone who sends us an e-mail
+                        (<code class="mail"
+                            >flippy underscore ram at hof minus university dot
+                            de</code
+                        >)
+												with a valid token will
+                        participate in a raffle and have a chance to win a
+                        &euro;10 Amazon gift card. The more tokens you send us,
+                        the higher your chances are.</s>
+												As of 2025-10-03, we raffled out all gift cards, so you will not get gift cards anymore.
+                    </li>
+                </ol>
+            </section>
+
+            <section id="question">
+							<h2>I got a USB Stick. How to verify it?</h2>
+								 <p>You can use the following SHA256 hashes to verify if the USB
+								 Stick you got from us is original and was not modified. Because
+								 there are multiple versions, the thumb drive should have one of
+								 the hashes listed below
+									<ul class="hammer">
+										<li>Old Version (before bug fix):
+											<code>c3261b3ee53b1da5a24d1d5fa34d09d779991acc23f6f2398c51c51f4eaea6d9</code>
+										</li>
+										<li>New Version (after bug fix):
+											<code>cb894dcf7926550293efa5baf7776350e44f63ea475bef7c50c752692737a7fb</code>
+										</li>
+										<li>Version 1.0.1:<br/>
+											<code>f3cee2bb4c9dca1d1200c3beb082a483b8607e280304ea3415c36d4a578f7dcd</code>
+										</li>
+									</ul>
+								 </p>
+
+								 <p>The SHA256 sums are calculated over the entire devices
+								 (e.g., /dev/sdb) and will change at first boot since running
+								 the experiment will resize the partitions and store files on
+								 the devices.</p>
+
+					</section>
+
+            <section>
+							<h2>How to verify the ISO image?</h2>
+								<p>The ISO image can be verified using SHA256. The current image
+								uploaded by us has the following hash:
+								<ul class="hammer">
+									<li><p>Version 1.0:</p>
+										<code>df42c0310e8a576ceeeeb8f56e806b76b256c239a795f8f443dcaf681614bce7</code>
+									</li>
+									<li><p>Version 1.0.1:</p>
+										<code>7180a19a1599ac07b7cfd8f18a61194a160b482da36981e9d45464bd880d3d9f</code>
+									</li>
+								</p>
+					</section>
+
+            <section>
+                <h2>Study Details</h2>
+                <p>
+                    When participating in this study by either using the upload
+                    functionality of our
+                    <a href="/hammeriso.iso" class="link--flip download"
+                        >ISO image</a
+                    >
+                    or manually uploading your results to this page, we will
+                    store information about your system. Take a look at our
+                    <a class="link--flip" href="privacy.html"
+                        >Privacy Statement</a
+                    >
+                    for more information.
+                </p>
+
+                <h3>Tokens</h3>
+                <p>
+                    If you have participated in the study, you can access a
+                    token by typing it in the following text field (to bookmark
+                    the token). Normally, it should not be required to manually
+                    type the token.
+                </p>
+                <ul class="hammer">
+                    <li>
+                        When you participated using the upload feature of our
+                        <a href="/hammeriso.iso" class="link--flip download"
+                            >ISO image</a
+                        >, you got a QR Code to directly access the token page
+                        in addition to the token.
+                    </li>
+                    <li>
+                        When you uploaded the results to this site, you were
+                        redirected to the token page after uploading it.
+                    </li>
+                </ul>
+                <form action="" method="GET" name="hashForm" id="hashForm">
+                    <label for="hash">Token</label>
+                    <input
+                        name="hash"
+                        type="text"
+                        id="hash"
+                        placeholder="HASH" />
+                    <input
+                        type="submit"
+                        id="submitHash"
+                        name="submitHash"
+                        value="Access Token" />
+                </form>
+
+                <h3>Upload new Dataset</h3>
+                <p>
+                    When you did the experiment on your system, you can upload
+                    the dataset using this dialog. Just select the ZIP file that
+                    is stored on the USB thumb drive. When the upload was
+                    successful, you are redirected to the page of the token
+									  generated.
+                    <b>Bookmark</b> this page in order to keep access to your
+                    token.
+                </p>
+                <form
+                    action="/upload/"
+                    method="POST"
+                    enctype="multipart/form-data">
+                    <label for="file">Select Dataset: </label>
+                    <input
+                        name="file"
+                        type="file"
+                        id="file"
+                        accept="application/zip" />
+
+                    <input
+                        type="submit"
+                        id="submitFile"
+                        name="submitFile"
+                        value="Upload File" />
+                </form>
+            <h3>Acknowledgments</h3>
+            This project was funded by the Deutsche Forschungsgemeinschaft (DFG) under grant number 503876675, and partly funded by the European Union under grant number ROF-SG20-3066-3-2-2.
+            </section>
+        </main>
+        <footer>
+            <nav class="nav-footer" aria-label="main">
+                <ul class="nav-list listReset">
+                    <li>
+                        <a class="link--flip" href="privacy.html">Privacy</a>
+                    </li>
+                    <li>
+                        <a
+                            class="link--flip"
+                            href="https://www.hof-university.de/impressum.html"
+                            >Impressum</a
+                        >
+                    </li>
+                </ul>
+            </nav>
+        </footer>
+    </body>
+</html>

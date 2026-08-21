@@ -1,0 +1,358 @@
+/***** Reset *****/
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+    margin: 0;
+}
+
+body {
+    /* 3. Add accessible line-height */
+    line-height: 1.5;
+    /* 4. Improve text rendering */
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+    text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+    isolation: isolate;
+}
+/**********************/
+
+:root {
+    --font-family: 'Source Sans Pro', 'Lucida Grande', sans-serif;
+    --main-color: #000000;
+    --link-color: var(--main-color);
+    --link-decoration-color: var(--main-color);
+    --specialArea-bg-color: rgba(217, 217, 217, 0.4);
+    --specialArea-border-color: rgb(217, 217, 217);
+    --button-bg-color: #ffffff;
+    --button-border-color: #000000;
+    --button-bg-color-hover: #000000;
+    --button-color-hover: #ffffff;
+    --info-bg-color: #190b2f;
+    --info-color: #b2aaff;
+    --info-headline-color: #ff5053;
+    --info-link-color: #fef2ff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    width: 100%;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+h3 {
+    margin: 1rem 0;
+}
+
+header {
+    margin-inline: auto;
+    width: 75vw;
+    text-align: center;
+}
+
+.logo {
+    height: auto;
+    max-height: 15rem;
+    display: block;
+    margin: 0 auto;
+
+    > img {
+        height: 100%;
+        margin: 0 auto;
+    }
+}
+.hammertime {
+    content: url('mcHammer.gif');
+    display: inline-block;
+    margin: initial;
+}
+
+footer {
+    padding: 0.5rem 3rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: end;
+}
+
+.nav-list {
+    li {
+        margin-right: 1rem;
+        display: inline-block;
+
+        &:last-of-type {
+            margin-right: unset;
+        }
+    }
+}
+
+main {
+    margin-inline: auto;
+    width: 75vw;
+    max-width: 50rem;
+    flex: 1;
+}
+
+p {
+    padding-bottom: 1rem;
+
+    &:last-of-type {
+        padding-bottom: unset;
+    }
+}
+
+section {
+    margin-bottom: 2rem;
+
+    &:last-of-type {
+        margin-bottom: unset;
+    }
+}
+
+a {
+    color: var(--main-color);
+    font-weight: 500;
+    text-decoration-color: var(--main-color);
+    text-decoration-thickness: 0.1em;
+
+    &.download::after {
+        content: '\f019'; /* FontAwesome Unicode */
+        font-family: var(--fa-style-family-classic);
+        bottom: -2px;
+        position: relative;
+        left: 2px;
+    }
+}
+
+label:hover {
+    cursor: pointer;
+}
+
+form {
+    margin: 2rem auto 0;
+    width: fit-content;
+
+    label {
+        display: block;
+    }
+}
+
+.link--flip {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.link--flip:hover {
+    transform: rotateY(180deg);
+}
+
+.participate-list {
+    padding: 1rem 2.4rem 1rem;
+    margin-top: 1rem;
+    background-color: var(--specialArea-bg-color);
+    border: 1px solid var(--specialArea-border-color);
+}
+
+ul {
+    --icon-size: 0.8em;
+    --gutter: 0.5em;
+    padding: 0 0 0 var(--icon-size);
+    list-style-type: disc;
+}
+
+ul.hammer {
+    --icon-size: 0.8em;
+    --gutter: 0.5em;
+    padding: 0 0 0 var(--icon-size);
+
+    li {
+        padding-left: var(--gutter);
+
+        &::marker {
+            content: '\f6e3'; /* FontAwesome Unicode */
+            font-family: var(--fa-style-family-classic);
+            font-size: var(--icon-size);
+        }
+    }
+}
+
+.listReset {
+    list-style: none;
+    padding: unset;
+}
+
+pre {
+    padding: 0.5rem 0.5rem 0.5rem;
+    margin-top: 0.5rem;
+    background-color: var(--specialArea-bg-color);
+    border: 1px solid var(--specialArea-border-color);
+    overflow: auto;
+
+    li::marker {
+        font-size: 1.3rem;
+    }
+}
+
+.error {
+    text-align: center;
+
+    > h1 {
+        margin-top: 1rem;
+    }
+}
+
+.mail {
+    user-select: all;
+}
+
+details {
+    margin: 1rem 0;
+}
+
+summary:hover {
+    cursor: pointer;
+}
+
+details > summary::before {
+    content: '';
+    margin-right: 0.3rem;
+}
+
+details > summary::marker {
+    content: '\f054';
+    font-family: var(--fa-style-family-classic);
+    font-size: var(--icon-size);
+}
+
+details[open] > summary::marker {
+    content: '\f078';
+}
+
+details[open] > summary::before {
+    margin-right: 0rem;
+}
+
+input[type='submit'] {
+    border: 2px solid var(--button-border-color);
+    background-color: var(--button-bg-color);
+    padding: 2px 10px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: var(--button-bg-color-hover);
+        color: var(--button-color-hover);
+    }
+}
+
+input[type='file'] {
+    background-color: var(--specialArea-bg-color);
+    border: 1px solid var(--specialArea-border-color);
+}
+
+input[type='file']::file-selector-button {
+    margin-right: 20px;
+    border: 2px solid var(--button-border-color);
+    background: var(--button-bg-color);
+    padding: 2px 10px;
+    cursor: pointer;
+}
+
+input[type='file']::file-selector-button:hover {
+    background-color: var(--button-bg-color-hover);
+    color: var(--button-color-hover);
+}
+
+.info {
+    padding: 1rem;
+    background-color: var(--info-bg-color);
+    color: var(--info-color);
+
+    .info-headline {
+        color: var(--info-headline-color);
+    }
+
+    a {
+        --main-color: var(--info-link-color);
+    }
+
+    .info-list {
+        li {
+            margin-top: 1rem;
+
+            b {
+                display: block;
+            }
+        }
+    }
+}
+
+.questions {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--specialArea-bg-color);
+    border: 1px solid var(--specialArea-border-color);
+
+    .questions-icon {
+        font-size: 1.5rem;
+    }
+}

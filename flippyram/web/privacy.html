@@ -1,0 +1,1420 @@
+<html>
+    <head>
+        <title>FLIPPYR.AM - Privacy Statement</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="fonts/fontawesome.min.css" rel="stylesheet" />
+        <link href="fonts/solid.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="styles.css" />
+        <script src="/helper.js"></script>
+    </head>
+    <body>
+        <header>
+            <a href="/" class="logo" id="js-hammertime">
+                <img
+                    src="flippyram-02-white-border.svg"
+                    alt="Logo of a hammer smashing a RAM with the text Flippy.am on the side" />
+            </a>
+        </header>
+        <main>
+            <h1>Privacy Statement</h1>
+            <section>
+                <h2>TL;DR</h2>
+                <ul>
+                    <li>
+                        We perform different measures to avoid loosing datasets,
+                        for example:
+                        <ul>
+                            <li>
+                              We protect the dataset from unauthorised access in accordance with the current state of the art.
+                            </li>
+                            <li>
+                                We perform encrypted backups of the collected
+                                datasets on a regular basis
+                            </li>
+                            <li>
+                              According to the DFG's guidelines for safeguarding good scientific practice, we must store the data for 10 years.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        We collect the following types of information:
+                        <ul>
+                            <li>
+                                General System Information (hardware components
+                                used in the system, CPU model, DIMM vendors,
+                                etc.)
+                                <ul>
+                                    <li>
+                                        How does the number of bit flips depend
+                                        on specific system properties, e.g.,
+                                        DIMM vendor, manufacturing date, etc.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                Information that enable fingerprinting of the
+                                system and bit flip locations
+                                <ul>
+                                    <li>
+                                        Several works claim that bit flips can
+                                        be used to fingerprint systems, but
+                                        tested this on a very small number of
+                                        systems. Is fingerprinting still
+                                        possible with hundrets or thousands of
+                                        systems?
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            </section>
+
+            <section>
+                <h2>Why do we need these Information?</h2>
+                <ul>
+                    <li>
+                        We collect general system information for correlation
+                        analysis
+                        <ul>
+                            <li>
+                                How is the number of bit flips found by specific
+                                tools related to e.g., DRAM vendors, production
+                                years, DRAM types, Multi-Channel, CPU, etc.
+                            </li>
+                            <li>
+                                How good works addressing function measurement
+                                using different tools on different hardware,
+                                e.g., number of DIMMs, CPU, cache sizes, etc.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        We collect information that enable fingerprinting and
+                        the location of bit flips
+                        <ul>
+                            <li>
+                                There are multiple papers claiming that
+                                Rowhammer can be used as physical uncloneable
+                                function (PUF) or for Fingerprinting.
+                            </li>
+                            <li>
+                                Typically, the same size is very small (e.g., it
+                                is possible to fingerprint 8 devices)
+                            </li>
+                            <li>
+                                We want to verify these approaches on bigger
+                                scale: Is is also possible to fingerprint a
+                                couple of hundred devices?
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Detailed List of Information we collect</h2>
+                <p>We collect the following types of information:</p>
+                <ul>
+                    <li>
+                        <b>General execution information</b>: Which tools were
+                        executed, How long did they run, etc.
+                    </li>
+                    <li>
+                        <b>System information that enable fingerprinting</b>:
+                        Serial number, etc. of hardware components)
+                    </li>
+                    <li>
+                        <b
+                            >System information that do not enable
+                            fingerprinting</b
+                        >: Vendor, product name, etc. of hardware components
+                    </li>
+                    <li>
+                        <b>System information that were measured</b>: Linear
+                        DRAM addressing functions, refresh rate, etc.
+                    </li>
+                    <li>
+                        <b>Logs for debugging and classification of data sets</b
+                        >: Did the tool crash or just not find anything, etc.
+                    </li>
+                    <li>
+                        <b>Logs of Bit Flip locations</b>: Physical addresses of
+                        victim rows, aggressor rows, timestamp the bit flip
+                        occurred, etc.
+                    </li>
+                </ul>
+                <h3>System Information</h3>
+                <p>
+                    In detail, we collect the information shown below regarding
+                    the system itself. For each type of information, we list
+                    some examples and provide the commands we use to collect the
+                    information as well as the output of these commands on one
+                    of our lab systems.
+                </p>
+                <ul>
+                    <li>
+                        <b>DIMM information based on SPD records of DIMMs</b>:
+                        Layout, Timings, Serial Numbers, etc.
+                        <details>
+                            <summary>
+                                Output of <code>decode-dimms</code> on our lab
+                                system
+                            </summary>
+                            <pre>
+									<code>
+# decode-dimms version 4.4
+
+Memory Serial Presence Detect Decoder
+By Philip Edelbrock, Christian Zuckschwerdt, Burkart Lingner,
+Jean Delvare, Trent Piepho and others
+
+
+Decoding EEPROM: /sys/bus/i2c/drivers/ee1004/10-0050
+Guessing DIMM is in                              bank 1
+Kernel driver used                               ee1004
+
+---=== SPD EEPROM Information ===---
+EEPROM CRC of bytes 0-125                        OK (0xBD97)
+# of bytes written to SDRAM EEPROM               384
+Total number of bytes in EEPROM                  512
+Fundamental Memory type                          DDR4 SDRAM
+SPD Revision                                     1.1
+Module Type                                      UDIMM
+EEPROM CRC of bytes 128-253                      OK (0x53D8)
+
+---=== Memory Characteristics ===---
+Maximum module speed                             2400 MT/s (PC4-19200)
+Size                                             8192 MB
+Banks x Rows x Columns x Bits                    16 x 16 x 10 x 64
+SDRAM Device Width                               8 bits
+Ranks                                            1
+Primary Bus Width                                64 bits
+AA-RCD-RP-RAS (cycles)                           17-17-17-39
+Supported CAS Latencies                          18T, 17T, 16T, 15T, 14T, 13T, 12T, 11T, 10T
+
+---=== Timings at Standard Speeds ===---
+AA-RCD-RP-RAS (cycles) as DDR4-2400              17-17-17-39
+AA-RCD-RP-RAS (cycles) as DDR4-2133              15-15-15-35
+AA-RCD-RP-RAS (cycles) as DDR4-1866              13-13-13-30
+AA-RCD-RP-RAS (cycles) as DDR4-1600              11-11-11-26
+
+---=== Timing Parameters ===---
+Minimum Cycle Time (tCKmin)                      0.833 ns
+Maximum Cycle Time (tCKmax)                      1.600 ns
+Minimum CAS Latency Time (tAA)                   13.750 ns
+Minimum RAS to CAS Delay (tRCD)                  13.750 ns
+Minimum Row Precharge Delay (tRP)                13.750 ns
+Minimum Active to Precharge Delay (tRAS)         32.000 ns
+Minimum Active to Auto-Refresh Delay (tRC)       45.750 ns
+Minimum Recovery Delay (tRFC1)                   350.000 ns
+Minimum Recovery Delay (tRFC2)                   260.000 ns
+Minimum Recovery Delay (tRFC4)                   160.000 ns
+Minimum Four Activate Window Delay (tFAW)        21.000 ns
+Minimum Row Active to Row Active Delay (tRRD_S)  3.300 ns
+Minimum Row Active to Row Active Delay (tRRD_L)  4.900 ns
+Minimum CAS to CAS Delay (tCCD_L)                5.000 ns
+Minimum Write Recovery Time (tWR)                15.000 ns
+Minimum Write to Read Time (tWTR_S)              2.500 ns
+Minimum Write to Read Time (tWTR_L)              7.500 ns
+
+---=== Other Information ===---
+Package Type                                     Monolithic
+Maximum Activate Count (MAC)                     Unlimited
+Post Package Repair                              One row per bank group
+Soft PPR                                         Supported
+Module Nominal Voltage                           1.2 V
+Thermal Sensor                                   No
+
+---=== Physical Characteristics ===---
+Module Height                                    32 mm
+Module Thickness                                 2 mm front, 1 mm back
+Module Reference Card                            A revision 2
+
+---=== Manufacturer Data ===---
+Module Manufacturer                              Kingston
+DRAM Manufacturer                                Samsung
+Manufacturing Location Code                      0x07
+Manufacturing Date                               2021-W39
+Assembly Serial Number                           0xB4FCC119
+Part Number                                      KF3200C16D4/8GX
+
+
+Decoding EEPROM: /sys/bus/i2c/drivers/ee1004/10-0052
+Guessing DIMM is in                              bank 3
+Kernel driver used                               ee1004
+
+---=== SPD EEPROM Information ===---
+EEPROM CRC of bytes 0-125                        OK (0xBD97)
+# of bytes written to SDRAM EEPROM               384
+Total number of bytes in EEPROM                  512
+Fundamental Memory type                          DDR4 SDRAM
+SPD Revision                                     1.1
+Module Type                                      UDIMM
+EEPROM CRC of bytes 128-253                      OK (0xAB72)
+
+---=== Memory Characteristics ===---
+Maximum module speed                             2400 MT/s (PC4-19200)
+Size                                             8192 MB
+Banks x Rows x Columns x Bits                    16 x 16 x 10 x 64
+SDRAM Device Width                               8 bits
+Ranks                                            1
+Primary Bus Width                                64 bits
+AA-RCD-RP-RAS (cycles)                           17-17-17-39
+Supported CAS Latencies                          18T, 17T, 16T, 15T, 14T, 13T, 12T, 11T, 10T
+
+---=== Timings at Standard Speeds ===---
+AA-RCD-RP-RAS (cycles) as DDR4-2400              17-17-17-39
+AA-RCD-RP-RAS (cycles) as DDR4-2133              15-15-15-35
+AA-RCD-RP-RAS (cycles) as DDR4-1866              13-13-13-30
+AA-RCD-RP-RAS (cycles) as DDR4-1600              11-11-11-26
+
+---=== Timing Parameters ===---
+Minimum Cycle Time (tCKmin)                      0.833 ns
+Maximum Cycle Time (tCKmax)                      1.600 ns
+Minimum CAS Latency Time (tAA)                   13.750 ns
+Minimum RAS to CAS Delay (tRCD)                  13.750 ns
+Minimum Row Precharge Delay (tRP)                13.750 ns
+Minimum Active to Precharge Delay (tRAS)         32.000 ns
+Minimum Active to Auto-Refresh Delay (tRC)       45.750 ns
+Minimum Recovery Delay (tRFC1)                   350.000 ns
+Minimum Recovery Delay (tRFC2)                   260.000 ns
+Minimum Recovery Delay (tRFC4)                   160.000 ns
+Minimum Four Activate Window Delay (tFAW)        21.000 ns
+Minimum Row Active to Row Active Delay (tRRD_S)  3.300 ns
+Minimum Row Active to Row Active Delay (tRRD_L)  4.900 ns
+Minimum CAS to CAS Delay (tCCD_L)                5.000 ns
+Minimum Write Recovery Time (tWR)                15.000 ns
+Minimum Write to Read Time (tWTR_S)              2.500 ns
+Minimum Write to Read Time (tWTR_L)              7.500 ns
+
+---=== Other Information ===---
+Package Type                                     Monolithic
+Maximum Activate Count (MAC)                     Unlimited
+Post Package Repair                              One row per bank group
+Soft PPR                                         Supported
+Module Nominal Voltage                           1.2 V
+Thermal Sensor                                   No
+
+---=== Physical Characteristics ===---
+Module Height                                    32 mm
+Module Thickness                                 2 mm front, 1 mm back
+Module Reference Card                            A revision 3
+
+---=== Manufacturer Data ===---
+Module Manufacturer                              Kingston
+DRAM Manufacturer                                Samsung
+Manufacturing Location Code                      0x01
+Manufacturing Date                               2021-W37
+Assembly Serial Number                           0x03A21D04
+Part Number                                      KF3200C16D4/8GX
+
+
+Number of SDRAM DIMMs detected and decoded: 2
+									</code>
+								</pre>
+                        </details>
+                        <details>
+                            <summary>
+                                Output of
+                                <code>dmidecode --type memory</code> on our lab
+                                system
+                            </summary>
+                            <pre>
+									<code>
+# dmidecode 3.6
+Getting SMBIOS data from sysfs.
+SMBIOS 3.3.0 present.
+
+Handle 0x0006, DMI type 16, 23 bytes
+Physical Memory Array
+	Location: System Board Or Motherboard
+	Use: System Memory
+	Error Correction Type: None
+	Maximum Capacity: 64 GB
+	Error Information Handle: Not Provided
+	Number Of Devices: 4
+
+Handle 0x000C, DMI type 17, 92 bytes
+Memory Device
+	Array Handle: 0x0006
+	Error Information Handle: Not Provided
+	Total Width: 64 bits
+	Data Width: 64 bits
+	Size: 8 GB
+	Form Factor: DIMM
+	Set: None
+	Locator: Controller0-ChannelA
+	Bank Locator: BANK 0
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: 2400 MT/s
+	Manufacturer: Kingston
+	Serial Number: B4FCC119
+	Asset Tag: 9876543210
+	Part Number: KF3200C16D4/8GX
+	Rank: 1
+	Configured Memory Speed: 2400 MT/s
+	Minimum Voltage: 1.2 V
+	Maximum Voltage: 1.2 V
+	Configured Voltage: 1.2 V
+	Memory Technology: DRAM
+	Memory Operating Mode Capability: Volatile memory
+	Firmware Version: Not Specified
+	Module Manufacturer ID: Bank 2, Hex 0x98
+	Module Product ID: Unknown
+	Memory Subsystem Controller Manufacturer ID: Unknown
+	Memory Subsystem Controller Product ID: Unknown
+	Non-Volatile Size: None
+	Volatile Size: 8 GB
+	Cache Size: None
+	Logical Size: None
+
+Handle 0x000D, DMI type 17, 92 bytes
+Memory Device
+	Array Handle: 0x0006
+	Error Information Handle: Not Provided
+	Total Width: Unknown
+	Data Width: Unknown
+	Size: No Module Installed
+	Form Factor: Unknown
+	Set: None
+	Locator: Controller0-ChannelA-DIMM1
+	Bank Locator: BANK 0
+	Type: Unknown
+	Type Detail: None
+
+Handle 0x000E, DMI type 17, 92 bytes
+Memory Device
+	Array Handle: 0x0006
+	Error Information Handle: Not Provided
+	Total Width: 64 bits
+	Data Width: 64 bits
+	Size: 8 GB
+	Form Factor: DIMM
+	Set: None
+	Locator: Controller0-ChannelB
+	Bank Locator: BANK 1
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: 2400 MT/s
+	Manufacturer: Kingston
+	Serial Number: 03A21D04
+	Asset Tag: 9876543210
+	Part Number: KF3200C16D4/8GX
+	Rank: 1
+	Configured Memory Speed: 2400 MT/s
+	Minimum Voltage: 1.2 V
+	Maximum Voltage: 1.2 V
+	Configured Voltage: 1.2 V
+	Memory Technology: DRAM
+	Memory Operating Mode Capability: Volatile memory
+	Firmware Version: Not Specified
+	Module Manufacturer ID: Bank 2, Hex 0x98
+	Module Product ID: Unknown
+	Memory Subsystem Controller Manufacturer ID: Unknown
+	Memory Subsystem Controller Product ID: Unknown
+	Non-Volatile Size: None
+	Volatile Size: 8 GB
+	Cache Size: None
+	Logical Size: None
+
+Handle 0x000F, DMI type 17, 92 bytes
+Memory Device
+	Array Handle: 0x0006
+	Error Information Handle: Not Provided
+	Total Width: Unknown
+	Data Width: Unknown
+	Size: No Module Installed
+	Form Factor: Unknown
+	Set: None
+	Locator: Controller0-ChannelB-DIMM1
+	Bank Locator: BANK 1
+	Type: Unknown
+	Type Detail: None
+									</code>
+								</pre>
+                        </details>
+                    </li>
+                    <li>
+                        <b>Information about the Mainboard</b> Manufacturer,
+                        Model, Version, Serial Number, etc.
+                        <details>
+                            <summary>
+                                Output of
+                                <code>dmidecode --type baseboard</code> on our
+                                lab system
+                            </summary>
+                            <pre>
+									<code>
+# dmidecode 3.6
+Getting SMBIOS data from sysfs.
+SMBIOS 3.3.0 present.
+
+Handle 0x0002, DMI type 2, 15 bytes
+Base Board Information
+	Manufacturer: BIOSTAR Group
+	Product Name: H510MH/E 2.0
+	Version:
+	Serial Number: None
+	Asset Tag: None
+	Features:
+		Board is a hosting board
+		Board is replaceable
+	Location In Chassis: None
+	Chassis Handle: 0x0003
+	Type: Motherboard
+	Contained Object Handles: 0
+
+Handle 0x001C, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Onboard - Other
+	Type: Other
+	Status: Enabled
+	Type Instance: 1
+	Bus Address: 0000:00:00.0
+
+Handle 0x001D, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Onboard - Other
+	Type: Other
+	Status: Enabled
+	Type Instance: 2
+	Bus Address: 0000:00:14.0
+
+Handle 0x001E, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Onboard - Other
+	Type: Other
+	Status: Enabled
+	Type Instance: 3
+	Bus Address: 0000:00:14.2
+
+Handle 0x001F, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Onboard - Other
+	Type: Other
+	Status: Enabled
+	Type Instance: 4
+	Bus Address: 0000:00:15.0
+
+Handle 0x0020, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Onboard - Other
+	Type: Other
+	Status: Enabled
+	Type Instance: 5
+	Bus Address: 0000:00:15.1
+
+Handle 0x0021, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Onboard - Other
+	Type: Other
+	Status: Enabled
+	Type Instance: 6
+	Bus Address: 0000:00:15.2
+
+Handle 0x0022, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Onboard - Other
+	Type: Other
+	Status: Enabled
+	Type Instance: 7
+	Bus Address: 0000:00:15.3
+
+Handle 0x0023, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Onboard - Other
+	Type: Other
+	Status: Enabled
+	Type Instance: 8
+	Bus Address: 0000:00:16.0
+
+Handle 0x0024, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Onboard - SATA
+	Type: SATA Controller
+	Status: Enabled
+	Type Instance: 1
+	Bus Address: 0000:00:17.0
+
+Handle 0x0025, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Onboard - Other
+	Type: Other
+	Status: Enabled
+	Type Instance: 9
+	Bus Address: 0000:00:1f.0
+
+Handle 0x0026, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Onboard - Sound
+	Type: Sound
+	Status: Enabled
+	Type Instance: 1
+	Bus Address: 0000:00:1f.3
+
+Handle 0x0027, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Onboard - Other
+	Type: Other
+	Status: Enabled
+	Type Instance: 10
+	Bus Address: 0000:00:1f.4
+
+Handle 0x0028, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Onboard - Other
+	Type: Other
+	Status: Enabled
+	Type Instance: 11
+	Bus Address: 0000:00:1f.5
+
+Handle 0x0029, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Onboard - Ethernet
+	Type: Ethernet
+	Status: Enabled
+	Type Instance: 1
+	Bus Address: 0000:00:1f.6
+									</code>
+								</pre>
+                        </details>
+                    </li>
+                    <li>
+                        <b>Information about the BIOS</b>: Vendor, Version, ROM
+                        Size, Firmware Revision, etc.
+                        <details>
+                            <summary>
+                                Output of <code>dmidecode --type bios</code> on
+                                our lab system
+                            </summary>
+                            <pre>
+									<code>
+# dmidecode 3.6
+Getting SMBIOS data from sysfs.
+SMBIOS 3.3.0 present.
+
+Handle 0x0000, DMI type 0, 26 bytes
+BIOS Information
+	Vendor: American Megatrends International, LLC.
+	Version: 5.19
+	Release Date: 02/24/2021
+	Address: 0xF0000
+	Runtime Size: 64 kB
+	ROM Size: 16 MB
+	Characteristics:
+		PCI is supported
+		BIOS is upgradeable
+		BIOS shadowing is allowed
+		Boot from CD is supported
+		Selectable boot is supported
+		BIOS ROM is socketed
+		EDD is supported
+		Japanese floppy for NEC 9800 1.2 MB is supported (int 13h)
+		Japanese floppy for Toshiba 1.2 MB is supported (int 13h)
+		5.25"/360 kB floppy services are supported (int 13h)
+		5.25"/1.2 MB floppy services are supported (int 13h)
+		3.5"/720 kB floppy services are supported (int 13h)
+		3.5"/2.88 MB floppy services are supported (int 13h)
+		Print screen service is supported (int 5h)
+		8042 keyboard services are supported (int 9h)
+		Serial services are supported (int 14h)
+		Printer services are supported (int 17h)
+		CGA/mono video services are supported (int 10h)
+		USB legacy is supported
+		BIOS boot specification is supported
+		Targeted content distribution is supported
+		UEFI is supported
+	BIOS Revision: 5.19
+
+Handle 0x002C, DMI type 13, 22 bytes
+BIOS Language Information
+	Language Description Format: Long
+	Installable Languages: 2
+		en|US|iso8859-1
+		zh|CN|unicode
+	Currently Installed Language: en|US|iso8859-1
+									</code>
+								</pre>
+                        </details>
+                    </li>
+                    <li>
+                        <b>Information about the System</b>: Manufacturer,
+                        Version, Serial Number, etc.
+                        <details>
+                            <summary>
+                                Output of
+                                <code>dmidecode --type system</code> on our lab
+                                system
+                            </summary>
+                            <pre>
+									<code>
+# dmidecode 3.6
+Getting SMBIOS data from sysfs.
+SMBIOS 3.3.0 present.
+
+Handle 0x0001, DMI type 1, 27 bytes
+System Information
+	Manufacturer: BIOSTAR Group
+	Product Name: H510MH/E 2.0
+	Version:
+	Serial Number: None
+	UUID: 03000200-0400-0500-0006-000700080009
+	Wake-up Type: Power Switch
+	SKU Number: None
+	Family: None
+
+Handle 0x002B, DMI type 32, 11 bytes
+System Boot Information
+	Status: No errors detected
+									</code>
+								</pre>
+                        </details>
+                    </li>
+                    <li>
+                        <b>Information about the Chassis</b>: Manufacturer,
+                        Type, Serial Number, etc.
+                        <details>
+                            <summary>
+                                Output of
+                                <code>dmidecode --type chassis</code> on our lab
+                                system
+                            </summary>
+                            <pre>
+									<code>
+SMBIOS 3.3.0 present.
+
+Handle 0x0003, DMI type 3, 22 bytes
+Chassis Information
+	Manufacturer: BIOSTAR Group
+	Type: Desktop
+	Lock: Not Present
+	Version: Default string
+	Serial Number: Default string
+	Asset Tag: Default string
+	Boot-up State: Safe
+	Power Supply State: Safe
+	Thermal State: Safe
+	Security Status: None
+	OEM Information: 0x00000000
+	Height: Unspecified
+	Number Of Power Cords: 1
+	Contained Elements: 0
+	SKU Number: Default string
+									</code>
+								</pre>
+                        </details>
+                    </li>
+                    <li>
+                        <b>Information about the CPU</b>: Manufacturer, Model,
+                        Flags, Characteristics, Microcode, etc.
+                        <details>
+                            <summary>
+                                Output of
+                                <code>dmidecode --type processor</code> on our
+                                lab system
+                            </summary>
+                            <pre>
+									<code>
+# dmidecode 3.6
+Getting SMBIOS data from sysfs.
+SMBIOS 3.3.0 present.
+
+Handle 0x001A, DMI type 4, 48 bytes
+Processor Information
+	Socket Designation: U3E1
+	Type: Central Processor
+	Family: Core i9
+	Manufacturer: Intel(R) Corporation
+	ID: 55 06 0A 00 FF FB EB BF
+	Signature: Type 0, Family 6, Model 165, Stepping 5
+	Flags:
+		FPU (Floating-point unit on-chip)
+		VME (Virtual mode extension)
+		DE (Debugging extension)
+		PSE (Page size extension)
+		TSC (Time stamp counter)
+		MSR (Model specific registers)
+		PAE (Physical address extension)
+		MCE (Machine check exception)
+		CX8 (CMPXCHG8 instruction supported)
+		APIC (On-chip APIC hardware supported)
+		SEP (Fast system call)
+		MTRR (Memory type range registers)
+		PGE (Page global enable)
+		MCA (Machine check architecture)
+		CMOV (Conditional move instruction supported)
+		PAT (Page attribute table)
+		PSE-36 (36-bit page size extension)
+		CLFSH (CLFLUSH instruction supported)
+		DS (Debug store)
+		ACPI (ACPI supported)
+		MMX (MMX technology supported)
+		FXSR (FXSAVE and FXSTOR instructions supported)
+		SSE (Streaming SIMD extensions)
+		SSE2 (Streaming SIMD extensions 2)
+		SS (Self-snoop)
+		HTT (Multi-threading)
+		TM (Thermal monitor supported)
+		PBE (Pending break enabled)
+	Version: Intel(R) Core(TM) i9-10900K CPU @ 3.70GHz
+	Voltage: 1.0 V
+	External Clock: 100 MHz
+	Max Speed: 5300 MHz
+	Current Speed: 3700 MHz
+	Status: Populated, Enabled
+	Upgrade: Other
+	L1 Cache Handle: 0x0017
+	L2 Cache Handle: 0x0018
+	L3 Cache Handle: 0x0019
+	Serial Number: To Be Filled By O.E.M.
+	Asset Tag: To Be Filled By O.E.M.
+	Part Number: To Be Filled By O.E.M.
+	Core Count: 10
+	Core Enabled: 10
+	Thread Count: 20
+	Characteristics:
+		64-bit capable
+		Multi-Core
+		Hardware Thread
+		Execute Protection
+		Enhanced Virtualization
+		Power/Performance Control
+									</code>
+								</pre>
+                        </details>
+                        <details>
+                            <summary>
+                                Output of <code>lscpu</code> on our lab system
+                            </summary>
+                            <pre>
+									<code>
+Architecture:             x86_64
+  CPU op-mode(s):         32-bit, 64-bit
+  Address sizes:          39 bits physical, 48 bits virtual
+  Byte Order:             Little Endian
+CPU(s):                   20
+  On-line CPU(s) list:    0-19
+Vendor ID:                GenuineIntel
+  BIOS Vendor ID:         Intel(R) Corporation
+  Model name:             Intel(R) Core(TM) i9-10900K CPU @ 3.70GHz
+    BIOS Model name:      Intel(R) Core(TM) i9-10900K CPU @ 3.70GHz To Be Filled By O.E.M. CPU @ 3.7GHz
+    BIOS CPU family:      207
+    CPU family:           6
+    Model:                165
+    Thread(s) per core:   2
+    Core(s) per socket:   10
+    Socket(s):            1
+    Stepping:             5
+    CPU(s) scaling MHz:   16%
+    CPU max MHz:          5300.0000
+    CPU min MHz:          800.0000
+    BogoMIPS:             7402.02
+    Flags:                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts
+                           rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline
+                          _timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bm
+                          i2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp vnmi pku ospke md_clear flush_l1d arch
+                          _capabilities
+Virtualization features:
+  Virtualization:         VT-x
+Caches (sum of all):
+  L1d:                    320 KiB (10 instances)
+  L1i:                    320 KiB (10 instances)
+  L2:                     2.5 MiB (10 instances)
+  L3:                     20 MiB (1 instance)
+NUMA:
+  NUMA node(s):           1
+  NUMA node0 CPU(s):      0-19
+Vulnerabilities:
+  Gather data sampling:   Mitigation; Microcode
+  Itlb multihit:          KVM: Mitigation: VMX disabled
+  L1tf:                   Not affected
+  Mds:                    Not affected
+  Meltdown:               Not affected
+  Mmio stale data:        Mitigation; Clear CPU buffers; SMT vulnerable
+  Reg file data sampling: Not affected
+  Retbleed:               Mitigation; Enhanced IBRS
+  Spec rstack overflow:   Not affected
+  Spec store bypass:      Mitigation; Speculative Store Bypass disabled via prctl
+  Spectre v1:             Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+  Spectre v2:             Mitigation; Enhanced / Automatic IBRS; IBPB conditional; RSB filling; PBRSB-eIBRS SW sequence; BHI SW loop, KVM SW loop
+  Srbds:                  Mitigation; Microcode
+  Tsx async abort:        Not affected
+									</code>
+								</pre>
+                        </details>
+                        <details>
+                            <summary>
+                                Output of
+                                <code>dmesg | grep "microcode"</code> on our lab
+                                system
+                            </summary>
+                            <pre>
+									<code>
+[    0.439621] microcode: Current revision: 0x000000fc
+[    0.439622] microcode: Updated early from: 0x000000e2
+[    0.439642] mce: [Hardware Error]: PROCESSOR 0:a0655 TIME 1733400380 SOCKET 0 APIC 0 microcode fc
+									</code>
+								</pre>
+                        </details>
+                    </li>
+                    <li>
+                        <b>Information about the Cache</b>: Size, Cache Levels,
+                        Type, Associativity, etc.
+                        <details>
+                            <summary>
+                                Output of <code>dmidecode --type cache</code> on
+                                our lab system
+                            </summary>
+                            <pre>
+									<code>
+# dmidecode 3.6
+Getting SMBIOS data from sysfs.
+SMBIOS 3.3.0 present.
+
+Handle 0x0017, DMI type 7, 27 bytes
+Cache Information
+	Socket Designation: L1 Cache
+	Configuration: Enabled, Not Socketed, Level 1
+	Operational Mode: Write Back
+	Location: Internal
+	Installed Size: 640 kB
+	Maximum Size: 640 kB
+	Supported SRAM Types:
+		Synchronous
+	Installed SRAM Type: Synchronous
+	Speed: Unknown
+	Error Correction Type: Parity
+	System Type: Other
+	Associativity: 8-way Set-associative
+
+Handle 0x0018, DMI type 7, 27 bytes
+Cache Information
+	Socket Designation: L2 Cache
+	Configuration: Enabled, Not Socketed, Level 2
+	Operational Mode: Write Back
+	Location: Internal
+	Installed Size: 2560 kB
+	Maximum Size: 2560 kB
+	Supported SRAM Types:
+		Synchronous
+	Installed SRAM Type: Synchronous
+	Speed: Unknown
+	Error Correction Type: Single-bit ECC
+	System Type: Unified
+	Associativity: 4-way Set-associative
+
+Handle 0x0019, DMI type 7, 27 bytes
+Cache Information
+	Socket Designation: L3 Cache
+	Configuration: Enabled, Not Socketed, Level 3
+	Operational Mode: Write Back
+	Location: Internal
+	Installed Size: 20 MB
+	Maximum Size: 20 MB
+	Supported SRAM Types:
+		Synchronous
+	Installed SRAM Type: Synchronous
+	Speed: Unknown
+	Error Correction Type: Multi-bit ECC
+	System Type: Unified
+	Associativity: 16-way Set-associative
+									</code>
+								</pre>
+                        </details>
+                    </li>
+
+                    <li>
+                        <b>Information about peripheral connectors</b>: USB,
+                        HDMI, Headphone/Microphone Jack, etc.
+                        <details>
+                            <summary>
+                                Output of
+                                <code>dmidecode --type connector</code> on our
+                                lab system
+                            </summary>
+                            <pre>
+									<code>
+# dmidecode 3.6
+Getting SMBIOS data from sysfs.
+SMBIOS 3.3.0 present.
+
+Handle 0x002D, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: None
+	Internal Connector Type: None
+	External Reference Designator: Keyboard
+	External Connector Type: PS/2
+	Port Type: Keyboard Port
+
+Handle 0x002E, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: None
+	Internal Connector Type: None
+	External Reference Designator: Mouse
+	External Connector Type: PS/2
+	Port Type: Mouse Port
+
+Handle 0x002F, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: None
+	Internal Connector Type: Other
+	External Reference Designator: COM 1
+	External Connector Type: None
+	Port Type: Serial Port 16550A Compatible
+
+Handle 0x0030, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J1A2B
+	Internal Connector Type: Other
+	External Reference Designator: Video
+	External Connector Type: DB-15 female
+	Port Type: Video Port
+
+Handle 0x0031, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J3A2
+	Internal Connector Type: Other
+	External Reference Designator: HDMI
+	External Connector Type: None
+	Port Type: Video Port
+
+Handle 0x0032, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: None
+	Internal Connector Type: None
+	External Reference Designator: USB1.1 - 1#
+	External Connector Type: Access Bus (USB)
+	Port Type: USB
+
+Handle 0x0033, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: None
+	Internal Connector Type: None
+	External Reference Designator: USB1.1 - 2#
+	External Connector Type: Access Bus (USB)
+	Port Type: USB
+
+Handle 0x0034, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: None
+	Internal Connector Type: None
+	External Reference Designator: USB1.1 - 3#
+	External Connector Type: Access Bus (USB)
+	Port Type: USB
+
+Handle 0x0035, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: None
+	Internal Connector Type: None
+	External Reference Designator: USB1.1 - 4#
+	External Connector Type: Access Bus (USB)
+	Port Type: USB
+
+Handle 0x0036, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: None
+	Internal Connector Type: None
+	External Reference Designator: USB1.1 - 5#
+	External Connector Type: Access Bus (USB)
+	Port Type: USB
+
+Handle 0x0037, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: None
+	Internal Connector Type: None
+	External Reference Designator: USB2.0 - 1#
+	External Connector Type: Access Bus (USB)
+	Port Type: USB
+
+Handle 0x0038, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: None
+	Internal Connector Type: None
+	External Reference Designator: USB2.0 - 2#
+	External Connector Type: Access Bus (USB)
+	Port Type: USB
+
+Handle 0x0039, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: None
+	Internal Connector Type: None
+	External Reference Designator: Ethernet
+	External Connector Type: RJ-45
+	Port Type: Network Port
+
+Handle 0x003A, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J8J1
+	Internal Connector Type: None
+	External Reference Designator: SATA Port 0 Direct Connect
+	External Connector Type: SAS/SATA Plug Receptacle
+	Port Type: SATA
+
+Handle 0x003B, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J7J1
+	Internal Connector Type: None
+	External Reference Designator: eSATA Port 4
+	External Connector Type: SAS/SATA Plug Receptacle
+	Port Type: SATA
+
+Handle 0x003C, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J6J1
+	Internal Connector Type: None
+	External Reference Designator: eSATA Port 3
+	External Connector Type: SAS/SATA Plug Receptacle
+	Port Type: SATA
+
+Handle 0x003D, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J7G1 - SATA Port 2
+	Internal Connector Type: SAS/SATA Plug Receptacle
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: SATA
+
+Handle 0x003E, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J7G2 - SATA Port 1
+	Internal Connector Type: SAS/SATA Plug Receptacle
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: SATA
+
+Handle 0x003F, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J1F2
+	Internal Connector Type: None
+	External Reference Designator: AC IN
+	External Connector Type: Other
+	Port Type: Other
+
+Handle 0x0040, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J5B1 - PCH JTAG
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0041, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J9A1 - TPM/PORT 80
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0042, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J9E4 - HDA 2X8 Header
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0043, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J9E7 - HDA 8Pin Header
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0044, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J8F1 - HDA HDMI
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0045, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J9E3 - Scan Matrix Keyboard
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0046, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J8E1 - SPI Program
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0047, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J9E5 - LPC Hot Docking
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0048, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J9G2 - LPC SIDE BAND
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0049, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J8F2 - LPC Slot
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x004A, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J8H3 - PCH XDP
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x004B, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J6H1 - SATA Power
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x004C, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J5J1 - FP Header
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x004D, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J4H1 - ATX Power
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x004E, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J1J3 - AVMC
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x004F, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J1H1 - BATT B
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0050, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J1H2 - BATT A
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0051, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J2G1 - CPU Fan
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0052, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J1D3 - XDP
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0053, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J4V1 - Memory Slot 1
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0054, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J4V2 - Memory Slot 2
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+
+Handle 0x0055, DMI type 8, 9 bytes
+Port Connector Information
+	Internal Reference Designator: J4C1 - FAN PWR
+	Internal Connector Type: Other
+	External Reference Designator: None
+	External Connector Type: None
+	Port Type: Other
+									</code>
+								</pre>
+                        </details>
+                    </li>
+                    <li>
+                        <b>Information about peripheral slots</b>: SIM Card
+                        slots, etc.
+                        <details>
+                            <summary>
+                                Output of <code>dmidecode --type slot</code> on
+                                our lab system
+                            </summary>
+                            <pre>
+									<code>
+# dmidecode 3.6
+Getting SMBIOS data from sysfs.
+SMBIOS 3.3.0 present.
+									</code>
+								</pre>
+                        </details>
+                    </li>
+                </ul>
+                <h3>Build Output of the Tools</h3>
+                <ul>
+                    <li>AMDRE</li>
+                    <li>Blacksmith</li>
+                    <li>Dare</li>
+                    <li>Drama</li>
+                    <li>Drama-Verify</li>
+                    <li>DRAMDig</li>
+                    <li>FlipFloyd</li>
+                    <li>TRRespass</li>
+                    <li>HammerTool</li>
+                    <li>MeasureRefreshRate</li>
+                    <li>RowhammerJs</li>
+                    <li>Rowhammer-Test</li>
+                    <li>RowPress</li>
+                </ul>
+                <h3>General System Information</h3>
+                <ul>
+                    <li>
+                        Measured Refresh Rate of the System
+                        <details>
+                            <summary>
+                                Output of <code>measureRefreshRate</code> on our
+                                lab system
+                            </summary>
+                            <pre>
+									<code>
+Measured a timing of 7.82us. Estimated refresh interval per row: 64.06ms
+									</code>
+								</pre>
+                        </details>
+                    </li>
+                </ul>
+                <h3>Addressing Function Measurement</h3>
+                <ul>
+                    <li>
+                        Measured DRAM Addressing Functions on the system
+                        <details>
+                            <summary>
+                                Output of the measurement tools (for example
+                                <code>AMDRE</code>) on our lab system
+                            </summary>
+                            <pre>
+									<code>
+ AMDRE  2024-12-17 17:31:22: Measured theshold: 650
+ AMDRE  2024-12-17 17:31:22: Filling initial bank groups...
+ AMDRE  2024-12-17 17:31:26: Regrouping bank groups until they look plausible (number of banks should be a power of 2)...
+ AMDRE  2024-12-17 17:32:08: Assuming 32 banks.
+ AMDRE  2024-12-17 17:32:08: Detecting block size...
+ AMDRE  2024-12-17 17:32:13: Assuming a block size of 4096 bytes
+ AMDRE  2024-12-17 17:32:13: Additional addresses were added to groups. A total of 0 pages with 0 errors.
+ AMDRE  2024-12-17 17:32:13: Calculating address functions. This may take a while.
+ AMDRE  2024-12-17 17:32:19: Found 5 address functions.
+ AMDRE  2024-12-17 17:32:19: Address Function: 0x4000 seems to be valid.
+ AMDRE  2024-12-17 17:32:19: Address Function: 0x1b000 seems to be valid.
+ AMDRE  2024-12-17 17:32:19: Address Function: 0x48000 seems to be valid.
+ AMDRE  2024-12-17 17:32:19: Address Function: 0x8b000 seems to be valid.
+ AMDRE  2024-12-17 17:32:19: Address Function: 0x120000 seems to be valid.
+ AMDRE  2024-12-17 17:32:19: Address functions calculated successfully.
+									</code>
+								</pre>
+                        </details>
+                    </li>
+                </ul>
+                <h3>Addressing Function Verification</h3>
+                <ul>
+                    <li>
+                        Results of the Addressing Function Verification
+                        <details>
+                            <summary>
+                                Output of <code>Drama-Verify</code> on our lab
+                                system
+                            </summary>
+                            <pre>
+									<code>
+ Drama-Verify  2024-12-17 17:34:24: Measuring threshold...
+ Drama-Verify  2024-12-17 17:34:34: Measured theshold: 630
+ Drama-Verify  2024-12-17 17:34:34: Allocating memory...
+ Drama-Verify  2024-12-17 17:34:34: Performing Drama Side Channel on addressing functions...
+ Drama-Verify  2024-12-17 17:34:45: Setting base value to:  21.46%.
+ Drama-Verify: ERROR  2024-12-17 17:34:50: Function 0x4000 has a difference of  10.44% ( 21.17%) from the expected value ( 10.73%) and is very likely incorrect.
+ Drama-Verify  2024-12-17 17:34:56: Function 0x1b000 has a difference of   0.05% ( 10.78%) from the expected value ( 10.73%) and seems to be correct.
+ Drama-Verify  2024-12-17 17:35:02: Function 0x48000 has a difference of   0.31% ( 10.42%) from the expected value ( 10.73%) and seems to be correct.
+ Drama-Verify  2024-12-17 17:35:07: Function 0x8b000 has a difference of   0.04% ( 10.69%) from the expected value ( 10.73%) and seems to be correct.
+ Drama-Verify  2024-12-17 17:35:13: Function 0x120000 has a difference of   0.20% ( 10.53%) from the expected value ( 10.73%) and seems to be correct.
+									</code>
+								</pre>
+                        </details>
+                    </li>
+                </ul>
+                <h3>Rowhammer Tools Output</h3>
+                <ul>
+                    <li>Blacksmith</li>
+                    <li>FlipFloyd</li>
+                    <li>TRRespass</li>
+                    <li>HammerTool</li>
+                    <li>RowhammerJs</li>
+                    <li>Rowhammer-Test</li>
+                    <li>RowPress</li>
+                </ul>
+            </section>
+
+            <section>
+              <h2>Questions?</h2>
+              <p>
+                If you have questions, please write us an e-mail (<code class="mail">flippy underscore ram at hof minus university dotde</code>) .
+              </p>
+            </section>
+        </main>
+        <footer>
+            <nav class="nav-footer" aria-label="main">
+                <ul class="nav-list listReset">
+                    <li>
+                        <a class="link--flip" href="privacy.html">Privacy</a>
+                    </li>
+                    <li>
+                        <a
+                            class="link--flip"
+                            href="https://www.hof-university.de/impressum.html"
+                            >Impressum</a
+                        >
+                    </li>
+                </ul>
+            </nav>
+        </footer>
+    </body>
+</html>
